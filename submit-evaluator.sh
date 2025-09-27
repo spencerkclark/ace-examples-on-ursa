@@ -2,14 +2,14 @@
 
 set -e
 
-CHECKPOINT=/home/Spencer.Clark/scratch/2025-09-26-fme-output/fme-output/3755651/training_checkpoints/best_inference_ckpt.tar
-FME_VENV=2025-09-26-fme
-EVALUATOR_CONFIG=ace-evaluator-config.yaml
-SCRIPT_DIR=$(pwd)
-SCRATCH=/scratch4/GFDL/gfdlscr/Spencer.Clark/2025-09-26-fme-output
-WANDB_NAME=2025-09-26-test-evaluator
-WANDB_USERNAME=spencerc_ai2
-OVERRIDE="checkpoint_path=$CHECKPOINT"
+CHECKPOINT=/path/to/checkpoint.tar  # Checkpoint of trained model
+FME_VENV=fme  # Name of conda environment with ace installed
+EVALUATOR_CONFIG=ace-evaluator-config.yaml  # Path to evaluator configuration
+SCRIPT_DIR=$(pwd)  # Absolute path to ace-examples-on-ursa directory
+SCRATCH=/scratch4/GFDL/gfdlscr/$USER  # Output in $SCRATCH/fme-output/$SLURM_JOB_ID
+WANDB_NAME=ace-evaluator  # Set to "" to disable WandB logging
+WANDB_USERNAME=wandb-username  # Set to "" to disable WandB logging
+OVERRIDE="checkpoint_path=$CHECKPOINT"  # Any parameters to override in the config via the command line
 
 conda run --name $FME_VENV \
     python -m fme.ace.validate_config \
