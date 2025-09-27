@@ -1,0 +1,28 @@
+experiment_dir: PLACEHOLDER
+n_forward_steps: 40  # 10 days
+forward_steps_in_memory: 50
+checkpoint_path: PLACEHOLDER
+logging:
+  log_to_screen: true
+  log_to_wandb: true
+  log_to_file: true
+  project: ace-example
+  wandb_dir_in_experiment_dir: true
+initial_condition:
+  path: /scratch4/GFDL/gfdlscr/Spencer.Clark/public-data/ERA5/netCDFs/2020010100.nc
+  start_indices:
+    times:
+    - "2020-01-01T00:00:00"
+    - "2020-01-02T00:00:00"
+forcing_loader:
+  dataset:
+    data_path: /scratch4/GFDL/gfdlscr/Spencer.Clark/public-data/ERA5/netCDFs
+  num_data_workers: 1
+data_writer:
+  save_prediction_files: true
+  save_monthly_files: false
+  names:
+  - h500
+  - PRATEsfc
+  - surface_temperature
+
