@@ -14,7 +14,7 @@ in a directory with open permissions on Ursa's scratch filesystem.
 Installation assumes you have `conda` installed and in your search path. To install
 the necessary software, clone this repository and run:
 ```
-$ git clone
+$ git clone https://github.com/spencerkclark/ace-examples-on-ursa.git
 $ cd ace-examples-on-ursa
 $ make install
 ```
