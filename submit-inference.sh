@@ -15,7 +15,7 @@ conda run --name $FME_VENV \
     python -m fme.ace.validate_config \
     --config_type inference \
     $INFERENCE_CONFIG --override $OVERRIDE
-bash run-inference-ursa.sh \
+bash scripts/run-inference-ursa.sh \
      $FME_VENV \
      $INFERENCE_CONFIG \
      $SCRIPT_DIR \

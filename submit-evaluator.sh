@@ -15,7 +15,7 @@ conda run --name $FME_VENV \
     python -m fme.ace.validate_config \
     --config_type evaluator \
     $EVALUATOR_CONFIG --override $OVERRIDE
-bash run-evaluator-ursa.sh \
+bash scripts/run-evaluator-ursa.sh \
      $FME_VENV \
      $EVALUATOR_CONFIG \
      $SCRIPT_DIR \

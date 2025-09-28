@@ -46,10 +46,10 @@ ARCHIVED_CONFIG=$JOB_CONFIG_DIR/archived_config.yaml
 if [ ! -d $JOB_CONFIG_DIR ]; then
     mkdir $JOB_CONFIG_DIR
     cp $TRAIN_CONFIG $ARCHIVED_CONFIG
-    cp $SCRIPT_DIR/run-train-ursa.sh $JOB_CONFIG_DIR
-    cp $SCRIPT_DIR/sbatch-scripts/requeueable-train.sh $JOB_CONFIG_DIR
-    cp $SCRIPT_DIR/sbatch-scripts/sbatch-train.sh $JOB_CONFIG_DIR
-    cp $SCRIPT_DIR/sbatch-scripts/sbatch-wandb-sync.sh $JOB_CONFIG_DIR
+    cp $SCRIPT_DIR/scripts/run-train-ursa.sh $JOB_CONFIG_DIR
+    cp $SCRIPT_DIR/scripts/requeueable-train.sh $JOB_CONFIG_DIR
+    cp $SCRIPT_DIR/scripts/sbatch-train.sh $JOB_CONFIG_DIR
+    cp $SCRIPT_DIR/scripts/sbatch-wandb-sync.sh $JOB_CONFIG_DIR
 fi
 
 WANDB_DATA_DIR=$FME_OUTPUT_DIR/wandb
