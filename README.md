@@ -31,8 +31,8 @@ Examples are included for training, inference, and evaluation. These can be
 done by running the `submit-train.sh`, `submit-inference.sh`, and
 `submit-evaluator.sh` scripts with appropriate modification of their
 parameters. Note that you will likely need to modify the SLURM account
-referenced within the scripts in the `sbatch-scripts` directory to one
-you have permission to run with to be able to run these examples successfully.
+referenced within the scripts in the `scripts` directory to one you have 
+permission to run with to be able to run these examples successfully.
 
 ## Documentation
 
