@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#SBATCH --job-name=ace-evaluator
+#SBATCH --job-name=ace-inference
 #SBATCH --partition=u1-h100
 #SBATCH --qos=gpuwf
 #SBATCH --account=gfdlhires
@@ -19,7 +19,7 @@
 set -xe
 
 FME_VENV="$1"
-EVALUATOR_CONFIG="$2"
+INFERENCE_CONFIG="$2"
 SCRIPT_DIR="$3"
 SCRATCH="$4"
 WANDB_NAME="$5"
@@ -41,10 +41,10 @@ JOB_CONFIG_DIR=$FME_OUTPUT_DIR/job_config
 ARCHIVED_CONFIG=$JOB_CONFIG_DIR/archived_config.yaml
 if [ ! -d $JOB_CONFIG_DIR ]; then
     mkdir $JOB_CONFIG_DIR
-    cp $EVALUATOR_CONFIG $ARCHIVED_CONFIG
-    cp $SCRIPT_DIR/run-inference-ursa.sh $JOB_CONFIG_DIR
-    cp $SCRIPT_DIR/sbatch-scripts/sbatch-inference.sh $JOB_CONFIG_DIR
-    cp $SCRIPT_DIR/sbatch-scripts/sbatch-wandb-sync.sh $JOB_CONFIG_DIR
+    cp $INFERENCE_CONFIG $ARCHIVED_CONFIG
+    cp $SCRIPT_DIR/scripts/run-inference-ursa.sh $JOB_CONFIG_DIR
+    cp $SCRIPT_DIR/scripts/sbatch-inference.sh $JOB_CONFIG_DIR
+    cp $SCRIPT_DIR/scripts/sbatch-wandb-sync.sh $JOB_CONFIG_DIR
 fi
 
 if [[ -z "${WANDB_NAME}" || -z "${WANDB_USERNAME}" ]]; then
@@ -55,14 +55,14 @@ else
 fi
 
 WANDB_NOTES="Results on Ursa: $FME_OUTPUT_DIR" \
-    WANDB_JOB_TYPE=inference \
-    WANDB_MODE=$WANDB_MODE \
-    WANDB_NAME=$WANDB_NAME \
-    WANDB_USERNAME=$WANDB_USERNAME \
-    srun -u conda run --name $FME_VENV \
-      torchrun \
-      -m fme.ace.evaluator $EVALUATOR_CONFIG \
-      --override $OVERRIDE
+     WANDB_JOB_TYPE=inference \
+     WANDB_MODE=$WANDB_MODE \
+     WANDB_NAME=$WANDB_NAME \
+     WANDB_USERNAME=$WANDB_USERNAME \
+     srun -u conda run --name $FME_VENV \
+       torchrun \
+       -m fme.ace.inference $INFERENCE_CONFIG \
+       --override $OVERRIDE
      
 if [ -d $WANDB_DATA_DIR ]; then
     # Submit non-blocking wandb sync job after training is complete to sync artifacts.
